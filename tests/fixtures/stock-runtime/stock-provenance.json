@@ -1,0 +1,433 @@
+{
+  "version": "0.1.48",
+  "registry_url": "https://registry.npmjs.org/serve-sim/0.1.48",
+  "dist": {
+    "shasum": "e034e3d12e42b7649ccf8f531a88fa5710367b1b",
+    "tarball": "https://registry.npmjs.org/serve-sim/-/serve-sim-0.1.48.tgz",
+    "fileCount": 67,
+    "integrity": "sha512-Kfg++zbtrRHYEOGAVk/9ftZamp40Qpz8WgP3idWaHoGaCJ01TrEZeq0UnWIsrGSaGhGgi0ytxMOsrEo3H/bFiA==",
+    "signatures": [
+      {
+        "sig": "MEQCICpTEHyBulYmZhlk5jAaPh7CWzX8GaFu6nZfVAsGJxijAiBQyATIXfNqQYj7oBSh8vzzOHTBod4W4BtC/jQJpeRvmQ==",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      },
+      {
+        "sig": "MEUCIQCm7IIOEOx2JkeUHTYjdnDeDSaklQDED8cehLSpmPLmowIgd7exDK50Lm3LpPA0QRdPYxSQS11DH6snvlJHvUj+KD0=",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      }
+    ],
+    "attestations": {
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/serve-sim@0.1.48",
+      "provenance": {
+        "predicateType": "https://slsa.dev/provenance/v1"
+      }
+    },
+    "unpackedSize": 5376240
+  },
+  "integrity_verified": "sha512-Kfg++zbtrRHYEOGAVk/9ftZamp40Qpz8WgP3idWaHoGaCJ01TrEZeq0UnWIsrGSaGhGgi0ytxMOsrEo3H/bFiA==",
+  "tarball_sha256": "07ce5aa9cc21081080bde29238ed257cf0ab9977608d90774ed4b31137fb6e58",
+  "files": [
+    {
+      "path": "dist/simax/serve-sim-ax-settings",
+      "bytes": 84424,
+      "sha256": "fb198ede4a5793d9f9ecbce9552d2c1f42b5f292c0127f10c31650cd6be506f4",
+      "installed_matches": true
+    },
+    {
+      "path": "dist/simcam/serve-sim-camera-helper",
+      "bytes": 200080,
+      "sha256": "1e69a436b97a4af6b7912c00da60ccc3cf4561540d1031e05de0c81e0e472cac",
+      "installed_matches": true
+    },
+    {
+      "path": "dist/simduo/serve-sim-duo-hid",
+      "bytes": 87168,
+      "sha256": "2b11c2c10b2de8f07c18dd7bd109b2c5c4aae35c1d957e0d356f2300f245d221",
+      "installed_matches": true
+    },
+    {
+      "path": "dist/simduo/serve-sim-duo-render",
+      "bytes": 564504,
+      "sha256": "432b9ca26736114479371e98023e59a7ddb57895cb0c0d80f78cbfdb83448005",
+      "installed_matches": true
+    },
+    {
+      "path": "dist/middleware.cjs",
+      "bytes": 59,
+      "sha256": "d52c72940cafdaf38857aabc804831805d4a4027d3aa46b8a534b62a51f39793",
+      "installed_matches": true
+    },
+    {
+      "path": "dist/simcam/libSimCameraInjector.dylib",
+      "bytes": 415368,
+      "sha256": "711841272fe91f6cf1363adcb16e2d1dd395c6f3bf40a9c513647dc7cda8b3fe",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/SimCamFakes.h",
+      "bytes": 2784,
+      "sha256": "cbb3d5481038090e556f0ebba967bec3f7c9acaa590c023d102aa466a532c294",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/SimCamFrameSource.h",
+      "bytes": 735,
+      "sha256": "db9fc90c03f1049fffb2db39be43af4d52aeabd7e56a15f9efdcd407e42d4005",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/SimCamLog.h",
+      "bytes": 111,
+      "sha256": "457f664cc10253ecdbaa042b227e76dc4ea8d92b7aceec72ca61fb2e61e50ebd",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/include/SimCamShared.h",
+      "bytes": 3555,
+      "sha256": "334ff8d53a792f685ea9baa62792f29ea7b8c3aee6117d8729d1d06ac3f27843",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/SimCamSwizzles.h",
+      "bytes": 48,
+      "sha256": "552d3e298e3937f3305eb06fac8bdf1c214763bfa76f33032f02524d6cd3aa19",
+      "installed_matches": true
+    },
+    {
+      "path": "dist/middleware.js",
+      "bytes": 817957,
+      "sha256": "f3eacf4fee21d62ffbae92de115d358c4409e37e54b1a918da13035b35afae69",
+      "installed_matches": true
+    },
+    {
+      "path": "dist/serve-sim.js",
+      "bytes": 914319,
+      "sha256": "2cd2ee095c1ece4347915bd362a8968f2b73914e680e0dab374684e8a0cfead8",
+      "installed_matches": true
+    },
+    {
+      "path": "package.json",
+      "bytes": 2674,
+      "sha256": "0727bf5325d57bfda7ec3ae945c18f14854dc7fcd5e9662acaa3bbadeee2dddb",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraHelper/main.m",
+      "bytes": 43279,
+      "sha256": "4c89179dc5833e120cecae1ce670c8f6a557fd0762a35f90a009ebbb28b0bf12",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimDuoHID/main.m",
+      "bytes": 7744,
+      "sha256": "3f9170cf8082b6f292a5c742cbffa99aa10254004fa57613e62212f9af6b25bd",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimAXSettings/sim-ax-settings.m",
+      "bytes": 9119,
+      "sha256": "935296363f0b7b713630879820fcef8432f51397ec8421a1b0f8cd52402ca903",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/SimCameraInjector.m",
+      "bytes": 532,
+      "sha256": "a5a7cdfb8c54ebbaeaf2bce60c51b1eb46d71d5315fd3c708eaaaccda609e5b2",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/SimCamFakes.m",
+      "bytes": 29377,
+      "sha256": "6129e64112823ea3ad5c38a394854a946867ae2084877811afc1e862aca17f25",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/SimCamFrameSource.m",
+      "bytes": 22201,
+      "sha256": "00a56a31071e02d7c006055900086213816d1d47c68fc414f0292538181d6df2",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/SimCamLog.m",
+      "bytes": 280,
+      "sha256": "7b2f67276ec9ed7b3b70c986d8f44b7178abe25986522bcd1544e08fb5116e9f",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/SimCamSwizzles.m",
+      "bytes": 66915,
+      "sha256": "ae73a76b0064bc14b02c84ad7dc3ff463be90bf4ae3142ddf9ced572ff12ab63",
+      "installed_matches": true
+    },
+    {
+      "path": "README.md",
+      "bytes": 16682,
+      "sha256": "26575b02cbd4fbf0f5a844ae2305668d622f0f85b6919f26354804468b28c4bb",
+      "installed_matches": true
+    },
+    {
+      "path": "dist/native/serve-sim-native.node",
+      "bytes": 1778272,
+      "sha256": "733e286acc686b6de4122d3ac68aa81005fadf0ac4942e644bfb33f654e26e27",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimAXSettings/build.sh",
+      "bytes": 694,
+      "sha256": "fcacac21f540d14dc237347254288735346ee81cdd2f1e10eda9a892446f9845",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraHelper/build.sh",
+      "bytes": 964,
+      "sha256": "fb74d86d5f4b3c3973a84258c53598f6a57b7c6f9f084db657fa3c383aaaed52",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimCameraInjector/build.sh",
+      "bytes": 1154,
+      "sha256": "e9268f673816c8bb31a6dd0d5812a30394df5c483534ef55d70ad8f7f4829bba",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimDuoHID/build.sh",
+      "bytes": 707,
+      "sha256": "a0c9243a024acae031bf3ba85ea7b4cf80f57624089ea9437572608026b8794f",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimDuoRenderer/build.sh",
+      "bytes": 924,
+      "sha256": "0f3e8763ecc27dfdbf3984bb042e2d2715c6ced866aef794cde4440a111e360a",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/build.sh",
+      "bytes": 1728,
+      "sha256": "bffc6f44fad5b85759dee36b97ece4664e9559ff82debdfb0bfd445fc812add1",
+      "installed_matches": true
+    },
+    {
+      "path": "scripts/serve-sim-arch.sh",
+      "bytes": 1578,
+      "sha256": "88782b18fdd37396f22d081db05babc1a02b60d483104e19122d49b7bd310e91",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/AccessibilityBridge.swift",
+      "bytes": 28149,
+      "sha256": "d3163df97c1efef3ea7aa0e45a939cfa77fa374a968e5fb7964f7f4c4630044d",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/CaptureEngine.swift",
+      "bytes": 7798,
+      "sha256": "d1576fd499fe50ce69e2a4874d0503ce6715ab05c290f664b129db4034fcf70d",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNativeSupport/DeviceDisplaySizes.swift",
+      "bytes": 2073,
+      "sha256": "2bd3fdbddcbf57da250c95d443196112021ca6745bd1bf61a0b9e86d4e3e4968",
+      "installed_matches": true
+    },
+    {
+      "path": "Tests/SimNativeSupportTests/DeviceDisplaySizesTests.swift",
+      "bytes": 3097,
+      "sha256": "22d7a57f1f30f57ebe3efc4e2309b55d290ee094790bc3dc8ec4c6d25cceb18b",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/DeviceHubKeyboardBridge.swift",
+      "bytes": 11855,
+      "sha256": "5b03e8570a4ca7217dabd0cf330d717110dd823fd23a8e26b33e76cc5877cc35",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNativeSupport/DeviceHubKeyboardRouting.swift",
+      "bytes": 5363,
+      "sha256": "8af96620a9fe8c20d39fd07b9cc42afb82c55df05e130f15c392af64ea8266c6",
+      "installed_matches": true
+    },
+    {
+      "path": "Tests/SimNativeSupportTests/DeviceHubKeyboardRoutingTests.swift",
+      "bytes": 4224,
+      "sha256": "fdb3e8145e358d5cee9280f5e356db8722b434a533c4419ee69e80af26390aef",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNativeSupport/DevicePose.swift",
+      "bytes": 2027,
+      "sha256": "4b366273674e3563255f6b6df139ab8988343b7cc3365b0b052420cda91c4a19",
+      "installed_matches": true
+    },
+    {
+      "path": "Tests/SimNativeSupportTests/DevicePoseTests.swift",
+      "bytes": 1332,
+      "sha256": "a68a9d420c96a7def5a433b6f13c96c79c04af074a5bee9822e21e3b07dab8cd",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimDuoRenderer/DuoHardwareProjection.swift",
+      "bytes": 3350,
+      "sha256": "f6ba08c47507a2b9b9747a8ccfba3d7e129923cfbdd07e99835290501655b0d9",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/DuoHIDBridge.swift",
+      "bytes": 2429,
+      "sha256": "0c98a920139639d894f8be6c5f4df162bba2e682badf9edc5f7378f9de82e79b",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimDuoRenderer/DuoRenderer.swift",
+      "bytes": 10713,
+      "sha256": "65a7f1d44e36c94700447773edc8ebccd76897dde3885fa7c26f11fb2a81f41b",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimDuoRenderer/DuoScreenProjection.swift",
+      "bytes": 4678,
+      "sha256": "7a0c40c9c798cc3e37fb7a42156b8fd163cd1cff2cc8dc6adfaaa11d31e70dfe",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimDuoRenderer/DuoShellMaterials.swift",
+      "bytes": 3959,
+      "sha256": "303facb8346c48a22ae439debab780a67e182e82328ccb2e66ad9217c0f0fc3f",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimDuoRenderer/FastPNG.swift",
+      "bytes": 6690,
+      "sha256": "862b0bafd5da844f07a2dd1719a5527d81fb0363d6a8787afc89ed814e81118f",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimDuoRenderer/Tests/FastPNGTests.swift",
+      "bytes": 3919,
+      "sha256": "ccaf13566046693e8ec901107022bf45c18de5d7b7ff284458e6e6d70a515ff8",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNativeSupport/FramebufferSurfaceSelector.swift",
+      "bytes": 2997,
+      "sha256": "a1ea4370638fc059ddf06891afd375730cc5af37d52d1fecbeccd89d2da81a88",
+      "installed_matches": true
+    },
+    {
+      "path": "Tests/SimNativeSupportTests/FramebufferSurfaceSelectorTests.swift",
+      "bytes": 4523,
+      "sha256": "b823099e6759fffc34d2d8e663973e9ccc52916e410c050c9f99ea4910f80320",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/FrameCapture.swift",
+      "bytes": 18854,
+      "sha256": "3a121353634d472e3912b73207d9e51fb70e6f3a3fa19bdeece792b264c13adc",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/H264Encoder.swift",
+      "bytes": 9659,
+      "sha256": "d4eae20eca081e4df0535b6fec882e3054499a29dbdcb66c924a3be2fd9e4f43",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/HIDInjector.swift",
+      "bytes": 33724,
+      "sha256": "1e4ffaf31ff73037efc4eccf8560dc4e03ed5cfccaee2bd87b8fc3c1eba19842",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimDuoRenderer/main.swift",
+      "bytes": 2644,
+      "sha256": "34e71575b13dfd8d6f1d829182a5f1b43607b5bdf3da54894a45a6b2c8b18010",
+      "installed_matches": true
+    },
+    {
+      "path": "Package.swift",
+      "bytes": 2514,
+      "sha256": "f93cb4b9b223302cb366c203140975f087a7b102570f52eaac9c31b3ae257962",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/PixelBufferUtils.swift",
+      "bytes": 2340,
+      "sha256": "66191afe77b60b79ba9126a9e889184e7d80f9ff3829010181ebfddc81eee0d0",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/sim-module.swift",
+      "bytes": 9497,
+      "sha256": "e5fe3c60af63bd70b8cfad1ab6f1c57c7d036799df29e271485c18d21bf4ec91",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/SimFrameworks.swift",
+      "bytes": 1311,
+      "sha256": "1ffd4ab81d9d09c3e0a7e7979d9e400c3c4231aa1d91e89a2538c17eb83df1ab",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/StreamFormat.swift",
+      "bytes": 1969,
+      "sha256": "a43ca072045ddf63ae3f8cccb61a202c538730747e6e242c0509ae067501aca9",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/VideoEncoder.swift",
+      "bytes": 2118,
+      "sha256": "f51cea194e9784af43f400621632c5b33ef5c8bb99bf55af005300ed689335a4",
+      "installed_matches": true
+    },
+    {
+      "path": "Sources/SimNative/Xcode.swift",
+      "bytes": 1006,
+      "sha256": "a7a800e888378d4d6a4385748613c02a45c558d7328a21a2a19fc0ba38073464",
+      "installed_matches": true
+    },
+    {
+      "path": "src/ax-shared.ts",
+      "bytes": 463,
+      "sha256": "30ed66b1861cd8eae5f2eeb0e8222722fd8febff47f4ea02a5b4bdf8f64e606b",
+      "installed_matches": true
+    },
+    {
+      "path": "src/ax.ts",
+      "bytes": 6906,
+      "sha256": "56b681de85ead001fb3d6e723ed0726340483f215449ff3202f6ae079ccb66ae",
+      "installed_matches": true
+    },
+    {
+      "path": "src/camera-helper.ts",
+      "bytes": 4662,
+      "sha256": "c621cabe2d4b0bdacd8139e760ea469939b8933a53931cf8cb9cb0543ebeb346",
+      "installed_matches": true
+    },
+    {
+      "path": "src/middleware.ts",
+      "bytes": 80441,
+      "sha256": "38aebbb7b7c5c43d8f15b84ad4753b39335b1cee24020ee001740527795f344a",
+      "installed_matches": true
+    },
+    {
+      "path": "src/native.ts",
+      "bytes": 9883,
+      "sha256": "045873f6ab383239afa1fbf651760f3dad8339a877816a03fccef2c6bfb707f5",
+      "installed_matches": true
+    },
+    {
+      "path": "src/simctl.ts",
+      "bytes": 490,
+      "sha256": "ebac66cb65d98d75abe6b19c07a2c3a1a0896f0082af736211d21a2152c69200",
+      "installed_matches": true
+    },
+    {
+      "path": "src/state.ts",
+      "bytes": 2647,
+      "sha256": "2f72a3385daa0bf47e944506c71c04cf55a372b87774454f19d3cf91f80770a4",
+      "installed_matches": true
+    }
+  ]
+}

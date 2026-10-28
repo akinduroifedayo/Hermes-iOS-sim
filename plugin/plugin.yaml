@@ -1,0 +1,11 @@
+name: hermes-ios
+version: 1.0.0
+description: Hermes-iOS-sim provides exact-target iOS builds and pinned stock simulator lifecycle with Hermes Browser feedback
+provides_tools:
+  - ios_iteration
+  - ios_setup
+provides_hooks:
+  - pre_tool_call
+  - post_tool_call
+provides_middleware:
+  - tool_execution

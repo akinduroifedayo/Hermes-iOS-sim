@@ -1,0 +1,32 @@
+{
+  "name": "hermes-ios",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test:contracts": "bun test tests/contracts",
+    "test:skill": "bun test tests/skill",
+    "test:desktop": "bun test tests/desktop",
+    "test:agent": "bun scripts/python-tests.ts",
+    "test:backend": "bun scripts/python-tests.ts",
+    "test:faults": "bun test tests/faults",
+    "test:privacy": "bun test tests/privacy",
+    "test:accessibility": "bun test tests/accessibility",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "package:release": "bun run scripts/package-release.ts",
+    "install:preview": "bun run scripts/install-local.ts",
+    "uninstall:preview": "bun run scripts/uninstall-local.ts",
+    "build:fixture": "bash fixtures/VisualIterationFixture/build.sh",
+    "build:plugin": "bun build src/desktop/plugin.js --outdir dist --target browser --format esm --external @hermes/plugin-sdk --external react --external react/jsx-runtime",
+    "verify": "bun scripts/verify.ts",
+    "qualify": "bun scripts/qualify.ts",
+    "test:u2": "bun run build:plugin && bun run test:desktop && bun run test:agent",
+    "test:u3": "bun scripts/python-tests.ts",
+    "test:integration": "bun test tests/integration/stock-runtime"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/bun": "1.3.5"
+  }
+}

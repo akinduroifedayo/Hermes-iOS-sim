@@ -1,0 +1,18 @@
+{
+  "payload": "serve-sim@0.1.48:sha512-Kfg++zbtrRHYEOGAVk/9ftZamp40Qpz8WgP3idWaHoGaCJ01TrEZeq0UnWIsrGSaGhGgi0ytxMOsrEo3H/bFiA==",
+  "key_source": "https://registry.npmjs.org/-/npm/v1/keys",
+  "signatures": [
+    {
+      "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U",
+      "keyFound": true,
+      "valid": true
+    },
+    {
+      "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U",
+      "keyFound": true,
+      "valid": true
+    }
+  ],
+  "at_least_one_registry_signature_valid": true,
+  "slsa_attestation_verified": false
+}

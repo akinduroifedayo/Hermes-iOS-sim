@@ -1,0 +1,96 @@
+{
+  "scope": "Harmless empty-body HTTP and handshake-only WebSocket probes; never a shell command",
+  "token_obtained_from_own_preview": true,
+  "http": [
+    {
+      "label": "null-origin",
+      "origin": "null",
+      "contentType": "application/json",
+      "authSupplied": true,
+      "status": 403,
+      "body": "{\"stdout\":\"\",\"stderr\":\"Invalid Origin\",\"exitCode\":1}"
+    },
+    {
+      "label": "other-origin",
+      "origin": "http://example.invalid",
+      "contentType": "application/json",
+      "authSupplied": true,
+      "status": 403,
+      "body": "{\"stdout\":\"\",\"stderr\":\"Cross-origin request blocked\",\"exitCode\":1}"
+    },
+    {
+      "label": "same-origin-no-token",
+      "origin": "http://127.0.0.1:52018",
+      "contentType": "application/json",
+      "authSupplied": false,
+      "status": 401,
+      "body": "{\"stdout\":\"\",\"stderr\":\"Unauthorized\",\"exitCode\":1}"
+    },
+    {
+      "label": "same-origin-empty-body",
+      "origin": "http://127.0.0.1:52018",
+      "contentType": "application/json",
+      "authSupplied": true,
+      "status": 400,
+      "body": "{\"stdout\":\"\",\"stderr\":\"Missing command\",\"exitCode\":1}"
+    },
+    {
+      "label": "wrong-content-type",
+      "origin": "http://127.0.0.1:52018",
+      "contentType": "text/plain",
+      "authSupplied": true,
+      "status": 415,
+      "body": "{\"stdout\":\"\",\"stderr\":\"Unsupported Media Type\",\"exitCode\":1}"
+    },
+    {
+      "label": "no-origin-empty-body",
+      "origin": null,
+      "contentType": "application/json",
+      "authSupplied": true,
+      "status": 400,
+      "body": "{\"stdout\":\"\",\"stderr\":\"Missing command\",\"exitCode\":1}"
+    }
+  ],
+  "ws": [
+    {
+      "route": "/exec-ws",
+      "origin": "null",
+      "error": "socket hang up"
+    },
+    {
+      "route": "/exec-ws",
+      "origin": "http://example.invalid",
+      "error": "socket hang up"
+    },
+    {
+      "route": "/exec-ws",
+      "origin": "http://127.0.0.1:52018",
+      "result": "open; no messages sent"
+    },
+    {
+      "route": "/exec-ws",
+      "origin": "http://127.0.0.1:52018",
+      "authSupplied": false,
+      "result": "open; no messages sent"
+    },
+    {
+      "route": "/helper/00000000-0000-4000-8000-000000000104/ws",
+      "origin": "null",
+      "authSupplied": false,
+      "result": "open; no messages sent"
+    }
+  ],
+  "stream": {
+    "status": 200,
+    "headers": {
+      "access-control-allow-headers": "Content-Type",
+      "access-control-allow-methods": "GET, POST, OPTIONS",
+      "access-control-allow-origin": "*",
+      "cache-control": "no-cache, no-store",
+      "connection": "keep-alive",
+      "content-type": "application/octet-stream",
+      "date": "Tue, 13 Oct 2026 13:14:50 GMT",
+      "transfer-encoding": "chunked"
+    }
+  }
+}

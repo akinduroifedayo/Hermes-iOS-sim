@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.build/
+DerivedData/
+.pytest_cache/
+.venv/
+.test-tmp/
+__pycache__/
+*.py[cod]
+.DS_Store
+.hermes/
+.env
+.env.*
+!.env.example

@@ -1,0 +1,7 @@
+{
+  "name": "hermes-ios",
+  "label": "Hermes-iOS-sim",
+  "description": "Exact-target native controls and stock lifecycle status; Browser feedback is host-owned",
+  "version": "1.0.0",
+  "api": "plugin_api.py"
+}
