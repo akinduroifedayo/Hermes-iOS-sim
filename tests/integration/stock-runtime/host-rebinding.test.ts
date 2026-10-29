@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, expect, test } from "bun:test";
 import { copyFileSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { request } from "node:http";
+import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { createInterface } from "node:readline";
 import { spawn, type ChildProcess } from "node:child_process";
@@ -8,7 +9,7 @@ import { spawn, type ChildProcess } from "node:child_process";
 // Exercise the checked-in dependency, never a global install or an npm "latest".
 // The CLI boots a simulator before listening. On Linux, mount its real exported
 // middleware with the CLI's basePath/device/proxyHelpers options instead.
-const scratch = mkdtempSync("/tmp/hios-host-rebinding-");
+const scratch = mkdtempSync(join(tmpdir(), "hios-host-rebinding-"));
 const manifests = new URL("../../../plugin/dependencies/", import.meta.url);
 let child: ChildProcess | undefined;
 let port: number;
@@ -40,7 +41,11 @@ const server = createServer((req, res) => {
   middleware(req, res, async () => { res.writeHead(404); res.end('Not found'); })
     .catch(err => { console.error(err); res.writeHead(500); res.end('Middleware failed'); });
 });
-server.on('upgrade', (req, socket, head) => middleware.handleUpgrade(req, socket, head));
+server.on('clientError', (_err, socket) => socket.destroy());
+server.on('upgrade', (req, socket, head) => {
+  socket.on('error', () => {});
+  middleware.handleUpgrade(req, socket, head);
+});
 server.listen(0, '127.0.0.1', () => {
   middleware.setServerPort?.(server.address().port);
   console.log(JSON.stringify({ port: server.address().port }));
@@ -91,7 +96,7 @@ function probe(path: string, foreign: boolean, options: { exec?: boolean; upgrad
     });
     req.on("upgrade", (res, socket) => {
       // No WS frames/commands are sent, even on the vulnerable version.
-      socket.destroy();
+      socket.end(() => socket.destroy());
       resolveResponse({ status: res.statusCode!, body: "" });
     });
     req.on("error", reject);
