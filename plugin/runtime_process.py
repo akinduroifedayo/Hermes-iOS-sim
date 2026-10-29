@@ -33,7 +33,7 @@ from .agent.native_plan import RuntimeIdentity
 from .runtime_state import LockTimeout, RuntimeStateStore
 from .serve_sim_dependency import StockDependency
 
-PINNED_SERVE_SIM_VERSION = '0.1.48'
+PINNED_SERVE_SIM_VERSION = '0.1.49-beta.139.1'
 
 CLEANUP_TRIGGERS = frozenset({
     'explicit_stop', 'close_unload', 'stale_replace', 'startup_exception',

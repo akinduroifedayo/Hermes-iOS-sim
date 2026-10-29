@@ -2,13 +2,13 @@
 
 ## Verdict
 
-**Known risk accepted for a localhost-only release.** The audit originally recommended holding release for the dependency issue below. The maintainer subsequently accepted deferring remediation with explicit disclosure. The issue remains unresolved. Never expose, forward, or tunnel the preview port. Localhost is not authorization and does not eliminate malicious-browser risks.
+**The dependency Host issue is remediated in the selected pin; native preview remains unqualified on this beta.** The plugin now locks exactly `serve-sim@0.1.49-beta.139.1`, including the upstream Host fix. Its configuration requires a loopback Host, never enables `--allow-exec`, and does not expose an execution token in preview HTML. Never expose, forward, or tunnel the preview port. Localhost is not authorization against other local processes.
 
-An isolated HTTP test of the actual `serve-sim` 0.1.48 middleware accepted a foreign Host, served a page containing its execution token, and accepted a matching foreign Origin through the execution endpoint's authentication checks. The request contained no command and returned the expected missing-command error. A mismatched-Origin control returned 403.
+The behavior regression installs `plugin/dependencies/package.json` and `package-lock.json` with `npm ci --ignore-scripts` in an isolated temporary directory, then mounts the real exported `serve-sim/middleware` in a Node HTTP server on `127.0.0.1`. It mirrors the CLI's preview path, exact-device selection and helper-proxy option, and forwards WebSocket upgrades. The CLI itself starts simulator work before listening, which cannot run on Linux without `simctl`.
 
-This proves the missing server-side boundary, not a complete DNS-rebinding attack in a particular browser. No live simulator, production endpoint, or shell command was used. Native-addon loading and child-process execution were disabled in the probe and neither was attempted.
+On historical 0.1.48, a foreign Host received HTTP 200 with the execution token. A matching foreign Origin and that token reached the missing-command check (400), and `/exec-ws` upgraded (101). On the new pin, foreign preview, POST `/exec`, and `/exec-ws` upgrade requests all return 403. Loopback preview returns 200 without an execution token, POST `/exec` returns 403, and a loopback WebSocket command frame reports `exec disabled` with exit code 126 and empty stdout. The loopback WebSocket remains available for non-shell controls. HTTP probes submit no command; the disabled-command WebSocket probe submits only the harmless `true` command, which the beta rejects before execution.
 
-Remediation remains recommended and is deferred, not completed. Prefer a reviewed upstream fix or source-bound dependency update over silently modifying downloaded files after integrity verification. Validate the HTTP and WebSocket paths, then exercise the native preview on the repaired candidate. A newly published version number alone is not evidence of a fix.
+These results exercise the locked package's actual HTTP and WebSocket code, not a complete DNS-rebinding attack in a particular browser or a live native simulator. Historical 0.1.48 provenance and security fixtures remain labeled historical and are not evidence for the beta. Registry integrity verifies published bytes; this update does not independently verify native source provenance or qualify macOS capture/HID behavior.
 
 ## Scope and method
 
@@ -22,8 +22,8 @@ The audit is not a certification. Scanner results are time-bound. Native depende
 
 | Finding | Evidence | Disposition |
 | --- | --- | --- |
-| Preview dependency accepts foreign Host values | Actual locked middleware served the preview and passed empty execution-request authentication under a matching foreign Origin | **Open vulnerability; remediation deferred by maintainer for the release.** Full browser exploitation is unproven, but the missing boundary is confirmed |
-| Unauthenticated stream and helper input routes | Retained dependency observations show permissive stream CORS and unauthenticated helper WebSocket handshake | Open dependency risk. Do not imply that execution-token checks cover simulator control |
+| Preview dependency accepts foreign Host values | Regression failed on 0.1.48 before the pin change (commit 6be2de4) and passes on the checked-in 0.1.49-beta.139.1 tree for preview HTTP, execution POST and WebSocket upgrade | **Fixed in the selected pin.** Loopback Host required in plugin configuration, shell execution disabled, execution token absent from HTML. Native preview still needs macOS qualification |
+| Unauthenticated local stream and helper input routes | Historical fixtures record 0.1.48 behavior; the beta adds request guards but local simulator control remains unauthenticated | Remaining local trust boundary. The Host/exec regression does not qualify native simulator control or authorize other local clients |
 | Approval paths contain raw newline and bidi characters | Production registration hooks emitted crafted paths unchanged in Run, Preview, and Handoff messages | Fixed by JSON-escaping displayed paths without altering target identity. Regression failed for all three actions before repair and passed afterward |
 | Release tar headers disclose local account identity | Actual package archive contained the packager's numeric and named owner/group | Fixed with neutral UID, GID, user, and group headers. Regression failed before repair and passed afterward |
 | Personal references in the public tree and history | Tree and all-local-refs inventory found personal authorship, machine metadata, development identifiers, and private evidence | Candidate tree sanitized. Private development history retained. Publish only a newly reviewed fresh-history snapshot, never by changing visibility of this development repository |
@@ -43,7 +43,7 @@ The build-input, environment, and Git items do not turn a trusted local build in
 
 Gitleaks 8.30.1 reported four current-tree matches and four history matches. Each was classified as a synthetic test sentinel used to assert that parser warnings and malformed configuration do not leak secrets. The fixtures remain intact; no scanner allowlist or bypass was added. No real credential was identified by these scans. That does not prove that no undiscovered credential exists.
 
-The dependency checks reported no known vulnerabilities in the locked npm tree, the Bun development tree, or the resolved Python development requirements at audit time. Advisory databases do not detect the missing Host validation demonstrated above.
+The dependency checks reported no known vulnerabilities in the locked npm tree, the Bun development tree, or the resolved Python development requirements at audit time. Those historical advisory scans did not detect the 0.1.48 Host issue; they are not a new scan of the beta.
 
 Bandit reported 19 observations. Subprocess imports and argument-vector calls account for most low-severity results. Its wildcard-bind warning points to a temporary port-availability check, not a network listener. Its URL-opening warning points to an npmjs-only, locked-integrity archive download. Neither warning proves safe redirects or trusted native code. The native and web reviews examined the surrounding code separately.
 
@@ -59,11 +59,11 @@ The prepared source export excludes `.git`, caches, environment files, screensho
 
 The complete local verification after the approval-display repair passed all ten declared stages. Its retained `verify-02.log` reports 821 Python cases, comprising 758 passes and 63 skips, plus 36 JavaScript passes and six skips. Runtime inputs stayed unchanged during that run; three documentation files changed. Later qualification-helper cleanup is checked separately. Exact source/package verification is a separate required step; use the accompanying artifact receipt rather than attributing older results to later bytes.
 
-The runtime delta is limited to escaped approval-display paths and more accurate risk disclosures. It has not been installed into the working Hermes environment or qualified through a new native-device run. Existing native-app evidence applies to the preceding runtime baseline, not automatically to this candidate.
+The earlier audit delta covered escaped approval-display paths and risk disclosures. This update additionally changes the locked preview dependency and its version checks, with live middleware regressions on Linux. It has not been installed into the working Hermes environment or qualified through a new native-device run. Existing native-app evidence applies to the preceding runtime baseline, not automatically to this candidate.
 
 ## Follow-up and release verification
 
-1. Deferred security follow-up: repair or replace the dependency Host/Origin boundary and rerun both HTTP and WebSocket regressions plus native preview checks.
+1. Qualify native preview on macOS with the repaired dependency. The locked-tree HTTP and WebSocket regressions now pass on Linux; those checks do not exercise Simulator capture/HID.
 2. Review the final source export, package manifest, archive metadata, and complete archive membership by hash.
 3. Choose the public repository destination and deliberately set public commit metadata. Preserve the private development history separately.
 4. Enable and verify a private vulnerability-reporting channel on that destination. This preparation does not claim that GitHub private reporting is already enabled.

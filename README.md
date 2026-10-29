@@ -2,7 +2,7 @@
 
 Build and visually iterate on native iOS apps inside Hermes Desktop. Select an Xcode project and Simulator, build the real app, and inspect it in Hermes Browser. Annotated feedback guides source edits and another native build.
 
-**Served through localhost.** The pinned preview dependency has a known unresolved Host-validation issue. Use only on a trusted local Mac. Never expose, forward, or tunnel the preview port. Localhost does not prevent access by other local processes or eliminate malicious-browser risks. Remediation is deferred for this release; see the [security audit](docs/security-audit.md).
+**Served through localhost.** The preview is pinned to `serve-sim@0.1.49-beta.139.1`, which requires a loopback Host in this plugin configuration. Shell execution is disabled: the plugin never passes `--allow-exec`, and the execution token is not in the preview HTML. Use only on a trusted local Mac; never expose, forward, or tunnel the preview port. Localhost does not prevent access by other local processes. See the [security audit](docs/security-audit.md) for regression results and remaining limits.
 
 This is a community plugin, not an official Nous Research product or a catalog-admitted integration. It controls a trusted local Mac. No minimum compatible Hermes release is established. Read [release status](plugin/RELEASE-STATUS.md) and [security limits](SECURITY.md) before installation.
 
