@@ -2,5 +2,5 @@
   "name": "hermes-ios-stock-dependency",
   "version": "1.0.0",
   "private": true,
-  "dependencies": { "serve-sim": "0.1.48" }
+  "dependencies": { "serve-sim": "0.1.49-beta.139.1" }
 }

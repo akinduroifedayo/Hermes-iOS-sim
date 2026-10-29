@@ -106,7 +106,7 @@ class FixtureProvisionTests(unittest.IsolatedAsyncioTestCase):
                 member.size = len(data)
                 archive.addfile(member, io.BytesIO(data))
         self.archive = stream.getvalue()
-        self.lock = {'packages': {'': {}, 'node_modules/serve-sim': {'version':'0.1.48', 'resolved':'https://registry.npmjs.org/serve-sim/-/serve-sim-0.1.48.tgz', 'integrity':'sha512-'+base64.b64encode(hashlib.sha512(self.archive).digest()).decode()}}}
+        self.lock = {'packages': {'': {}, 'node_modules/serve-sim': {'version':'0.1.49-beta.139.1', 'resolved':'https://registry.npmjs.org/serve-sim/-/serve-sim-0.1.49-beta.139.1.tgz', 'integrity':'sha512-'+base64.b64encode(hashlib.sha512(self.archive).digest()).decode()}}}
         (self.manifest/'package-lock.json').write_text(json.dumps(self.lock))
         (self.manifest/'package.json').write_text('{"private":true}')
         self.bin = self.root/'bin'
@@ -289,7 +289,7 @@ class DependencyTests(unittest.TestCase):
             self.assertEqual(dependency.status()['status'], 'missing')
             directive = dependency.approval_hook(tool_name='ios_setup', args={'action':'provision'})
             self.assertEqual(directive['action'], 'approve')
-            self.assertIn('0.1.48', directive['message'])
+            self.assertIn('0.1.49-beta.139.1', directive['message'])
             self.assertIn('native', directive['message'])
             self.assertFalse(root.exists())
 

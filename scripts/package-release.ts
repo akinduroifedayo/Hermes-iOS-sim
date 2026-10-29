@@ -35,7 +35,7 @@ export function verifyRelease(candidate: string, manifest: ReleaseManifest): voi
   const imports = [...readFileSync(join(candidate, 'desktop/plugin.js'), 'utf8').matchAll(/(?:from\s+|import\s*\(\s*)["']([^"']+)["']/g)].map(m => m[1]);
   if (imports.some(name => !['@hermes/plugin-sdk', 'react', 'react/jsx-runtime'].includes(name))) throw new Error('desktop_import_not_public');
   const lock = JSON.parse(readFileSync(join(candidate, 'dependencies/package-lock.json'), 'utf8'));
-  if (lock.packages['node_modules/serve-sim']?.version !== '0.1.48') throw new Error('stock_pin_mismatch');
+  if (lock.packages['node_modules/serve-sim']?.version !== '0.1.49-beta.139.1') throw new Error('stock_pin_mismatch');
 }
 
 export function packageRelease(options: { output: string }): { output: string; candidatePath: string; manifestPath: string; manifestSha256: string; files: number; archivePath: string; archiveSha256: string } {

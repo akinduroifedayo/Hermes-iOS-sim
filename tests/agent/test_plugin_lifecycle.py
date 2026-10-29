@@ -44,7 +44,7 @@ class FixtureDependency:
         self.ready = True
     def status(self):
         return {'ready': self.ready, 'status': 'ready' if self.ready else 'missing',
-                'entry': str(self.entry), 'version': '0.1.48', 'lock_sha256': 'fixture-lock',
+                'entry': str(self.entry), 'version': '0.1.49-beta.139.1', 'lock_sha256': 'fixture-lock',
                 'native': {'sha256': 'fixture-no-native'}, 'provenance': 'fixture-not-stock'}
 
 class LifecycleFixture(unittest.TestCase):

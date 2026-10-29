@@ -96,7 +96,9 @@ class RegistrationTests(RegistrationFixture):
         directive = self.disclose(args)
         self.assertEqual(directive['action'], 'approve')
         self.assertIn('unauthenticated simulator stream/HID/start/shutdown', directive['message'])
-        self.assertIn('token and Origin checks', directive['message'])
+        self.assertIn('requires a loopback Host', directive['message'])
+        self.assertIn('Shell execution is disabled (no --allow-exec)', directive['message'])
+        self.assertIn('token is not in the preview page', directive['message'])
         self.assertNotIn('unauthenticated exec', directive['message'])
         devices = json.dumps({'devices': {'com.apple.CoreSimulator.SimRuntime.iOS-26-5':
             [{'udid': args['udid'], 'state': 'Booted'}]}})

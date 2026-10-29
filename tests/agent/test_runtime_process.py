@@ -22,6 +22,20 @@ from test_plugin_lifecycle import LifecycleFixture
 
 
 class StockProcessBoundaryTests(LifecycleFixture):
+    def test_preview_launch_keeps_exec_and_remote_auth_disabled(self):
+        popen = subprocess.Popen
+        def capture(argv, **kwargs):
+            if str(self.entry) in argv:
+                self.assertEqual(argv[2:6], [self.identity.udid, '--host', '127.0.0.1', '--port'])
+                self.assertEqual(len(argv), 7)  # No --allow-exec or --auth-token.
+                self.assertNotIn('SERVE_SIM_AUTH_TOKEN', kwargs['env'])
+                raise RuntimeError('captured preview launch')
+            return popen(argv, **kwargs)
+        with patch.dict(os.environ, {'SERVE_SIM_AUTH_TOKEN': 'fixture-remote-token'}), \
+                patch('plugin.runtime_process.subprocess.Popen', side_effect=capture):
+            with self.assertRaisesRegex(RuntimeError, 'captured preview launch'):
+                self.start()
+
     def test_real_u8_missing_dependency_does_not_launch_or_install(self):
         self.manager.dependency = StockDependency(self.root/'official-data')
         with patch('plugin.runtime_process.subprocess.Popen') as spawn:

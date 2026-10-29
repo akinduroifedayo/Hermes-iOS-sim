@@ -7,6 +7,7 @@ import { assertHomesContained, fixtureEnv, fixtureRoot, HOMES, requireContained,
 // Explicit, already-qualified inputs only. Never discover personal npm caches,
 // install dependencies, open a chat, start a server, or mutate a simulator here.
 const stockRoot = process.env.HERMES_IOS_STOCK_ROOT;
+const historicalStockRoot = process.env.HERMES_IOS_HISTORICAL_STOCK_ROOT;
 const hostRoot = process.env.HERMES_IOS_HOST_SOURCE;
 const python = process.env.HERMES_IOS_HOST_PYTHON;
 const evidence = new URL("../../fixtures/stock-runtime/", import.meta.url);
@@ -59,14 +60,14 @@ describe("0.1.48 retained observations (historical, not a new live security pass
   });
 });
 
-describe.skipIf(!stockRoot)("explicit stock artifact qualification (no device/server invocation)", () => {
-  test("every current file still matches exact verified 0.1.48 bytes", async () => {
+describe.skipIf(!historicalStockRoot)("explicit historical 0.1.48 artifact (not the current pin)", () => {
+  test("every historical file still matches the retained 0.1.48 receipt", async () => {
     const provenance = await receipt("stock-provenance.json");
     for (const file of provenance.files) {
-      const bytes = new Uint8Array(await Bun.file(join(stockRoot!, file.path)).arrayBuffer());
+      const bytes = new Uint8Array(await Bun.file(join(historicalStockRoot!, file.path)).arrayBuffer());
       expect({ path: file.path, size: bytes.length, hash: sha256(bytes) }).toEqual({ path: file.path, size: file.bytes, hash: file.sha256 });
     }
-    const pkg = await Bun.file(join(stockRoot!, "package.json")).json();
+    const pkg = await Bun.file(join(historicalStockRoot!, "package.json")).json();
     expect(pkg.version).toBe("0.1.48");
     expect(pkg.engines.node).toBe(">=20");
     expect(pkg.bin["serve-sim"]).toBe("dist/serve-sim.js");
@@ -74,16 +75,20 @@ describe.skipIf(!stockRoot)("explicit stock artifact qualification (no device/se
     expect(pkg.scripts).not.toHaveProperty("postinstall");
     expect(pkg.dependencies).toEqual({ "inspect-webkit": "^0.0.5", sonner: "^2.0.7", ws: "^8.21.0" });
   });
+});
 
-  test("real CLI exposes exact-device and loopback startup flags, not a safe-shell promise", () => {
+describe.skipIf(!stockRoot)("explicit current stock artifact qualification", () => {
+  test("real CLI exposes exact-device and loopback flags with shell execution opt-in", () => {
     const help = run(["node", join(stockRoot!, "dist/serve-sim.js"), "--help"]);
     for (const flag of ["[devices...]", "--host <addr>", "--port <port>", "--fit", "--panes <panes>"]) expect(help).toContain(flag);
     expect(help).toContain('"127.0.0.1"');
-    expect(help).toContain("token-gated shell-exec route");
-    expect(run(["node", join(stockRoot!, "dist/serve-sim.js"), "--version"]).trim()).toBe("0.1.48");
+    expect(help).toContain("--allow-exec");
+    expect(help).toContain("Off by");
+    expect(help).toContain("default; other preview tools");
+    expect(run(["node", join(stockRoot!, "dist/serve-sim.js"), "--version"]).trim()).toBe("0.1.49-beta.139.1");
   });
 
-  test("published native addon loads in the actual Node runtime without invoking capture/HID", () => {
+  test.skipIf(process.platform !== "darwin")("published native addon loads in the actual Node runtime without invoking capture/HID", () => {
     const output = run(["node", "-e", 'const m=require(process.argv[1]); console.log(JSON.stringify({node:process.version,arch:process.arch,exports:Object.keys(m).sort()}))', join(stockRoot!, "dist/native/serve-sim-native.node")]);
     const native = JSON.parse(output);
     expect(native.exports).toEqual(["SimCapture", "SimHID", "axDescribe", "axFrontmost"]);
@@ -133,8 +138,8 @@ with tempfile.TemporaryDirectory(prefix="hermes-ios-u1-", dir=os.environ["TMPDIR
     assert handle is not None
     entry = registry.get_entry(name, scope=manager.scope_key)
     assert json.loads(entry.handler({"value":"actual-registry"}))["echo"] == "actual-registry"
-    ctx.state.set("qualification", {"pin":"0.1.48"})
-    assert ctx.state.get("qualification") == {"pin":"0.1.48"}
+    ctx.state.set("qualification", {"pin":"0.1.49-beta.139.1"})
+    assert ctx.state.get("qualification") == {"pin":"0.1.49-beta.139.1"}
     import hashlib
     expected_namespace = "agent-plugin-ios-u1-contract-probe-" + hashlib.sha256(b"ios-u1-contract-probe").hexdigest()[:8]
     assert ctx.state.data_dir == pathlib.Path(root)/"plugin-data"/expected_namespace

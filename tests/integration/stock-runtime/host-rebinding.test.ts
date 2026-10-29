@@ -41,7 +41,10 @@ const server = createServer((req, res) => {
     .catch(err => { console.error(err); res.writeHead(500); res.end('Middleware failed'); });
 });
 server.on('upgrade', (req, socket, head) => middleware.handleUpgrade(req, socket, head));
-server.listen(0, '127.0.0.1', () => console.log(JSON.stringify({ port: server.address().port })));
+server.listen(0, '127.0.0.1', () => {
+  middleware.setServerPort?.(server.address().port);
+  console.log(JSON.stringify({ port: server.address().port }));
+});
 `);
   child = spawn("node", [server, join(stockRoot, "package.json")], {
     cwd: scratch, env: { PATH: process.env.PATH, HOME: scratch, TMPDIR: scratch }, stdio: ["ignore", "pipe", "pipe"],
@@ -131,8 +134,22 @@ test("loopback Host still receives the preview without an execution token", asyn
 
 test("execution stays disabled even with loopback Host+Origin", async () => {
   const http = await probe("/exec", false, { exec: true });
-  const ws = await probe("/exec-ws", false, { upgrade: true });
-  console.log("loopback exec", { http: http.status, ws: ws.status });
+  // The loopback WS also carries non-shell preview controls. Its handshake can
+  // succeed; the command frame must explicitly report disabled execution.
+  const ws = await new Promise<Record<string, unknown>>((resolveResponse, reject) => {
+    const socket = new WebSocket(`ws://127.0.0.1:${port}/exec-ws`, {
+      headers: { Origin: `http://127.0.0.1:${port}` },
+    });
+    const timer = setTimeout(() => { socket.close(); reject(new Error("exec WS response timeout")); }, 3000);
+    socket.onopen = () => socket.send("{}");
+    socket.onmessage = event => {
+      const message = JSON.parse(String(event.data));
+      if (message.ready) socket.send(JSON.stringify({ id: 1, command: "true" }));
+      if (message.id === 1) { clearTimeout(timer); socket.close(); resolveResponse(message); }
+    };
+    socket.onerror = () => { clearTimeout(timer); socket.close(); reject(new Error("exec WS failed")); };
+  });
+  console.log("loopback exec", { http: http.status, ws });
   expect(http.status).toBe(403);
-  expect(ws.status).toBe(403);
+  expect(ws).toMatchObject({ id: 1, stdout: "", exitCode: 126, error: "exec disabled; start with --allow-exec" });
 });

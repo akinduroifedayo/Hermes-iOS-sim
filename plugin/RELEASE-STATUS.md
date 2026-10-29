@@ -4,7 +4,7 @@ Hermes-iOS-sim is a community plugin. It is not official, endorsed by Nous Resea
 
 ## Localhost-only operation
 
-The locked preview dependency lacks Host validation. An isolated test confirmed that a foreign Host can receive the preview page and pass execution-request authentication with a matching foreign Origin. No shell command was executed. A complete browser attack is unproven. The maintainer has accepted deferring remediation for this release. Use only on a trusted local Mac; never expose, forward, or tunnel the preview port. Localhost is not an authorization boundary and does not eliminate malicious-browser risks. This is a disclosed risk acceptance, not a security clearance.
+The locked preview dependency is `serve-sim@0.1.49-beta.139.1`. Its upstream Host fix requires a loopback Host in the plugin configuration. Shell execution is disabled because the plugin never passes `--allow-exec`, and the execution token is not in the preview HTML. The checked-in-tree regression rejects foreign-Host preview, execution POST, and WebSocket upgrade requests while preserving loopback preview access. It also verifies disabled loopback shell execution. This replaces the deferred 0.1.48 Host issue; it is not a security clearance. Use only on a trusted local Mac; never expose, forward, or tunnel the preview port. Localhost is not authorization against other local processes. Native preview on this beta still needs macOS qualification.
 
 ## Observed behavior
 
@@ -35,8 +35,8 @@ The public-preparation audit records the current source, dependency, test, and p
 
 ## Dependency and security boundaries
 
-Approved setup downloads locked `serve-sim` 0.1.48. The older 0.1.45 artifact is not the selected pin. The npm subprocess requires direct access to `registry.npmjs.org` and does not inherit custom registry or proxy settings. The separate Python archive download can use environment or system proxies and verifies locked integrity.
+Approved setup downloads exactly `serve-sim` 0.1.49-beta.139.1 and its checked-in locked tree. The retained 0.1.48 fixtures are historical observations, not qualification of this beta. The npm subprocess requires direct access to `registry.npmjs.org` and does not inherit custom registry or proxy settings. The separate Python archive download can use environment or system proxies and verifies locked integrity.
 
-Simulator stream, input, start, and shutdown routes are unauthenticated. Shell execution requires a token disclosed by the unauthenticated preview page. Origin checks do not constrain non-browser local clients, and Host validation is missing. Loopback is not authorization. Do not expose or tunnel the preview service, and do not treat this plugin as a security boundary against other local processes or malicious web content.
+Local simulator stream, input, start, and shutdown routes remain unauthenticated. The plugin requires a loopback Host and does not configure remote authentication. Shell execution is disabled without `--allow-exec`; the plugin never enables it, and no execution token is disclosed by the preview HTML. The loopback `/exec-ws` connection still supports non-shell preview controls; command frames are rejected. Origin checks do not constrain non-browser local clients. Loopback is not authorization. Do not expose or tunnel the preview service, and do not treat this plugin as a security boundary against other local processes or malicious web content.
 
 The archive contains no downloaded npm payloads, native dependency binaries, Apple components, screenshots, or private acceptance receipts. Registry integrity does not prove safe execution or reproducible native builds. [Third-party notices](THIRD-PARTY-NOTICES.md) describe the separate review needed before redistributing native dependency binaries.

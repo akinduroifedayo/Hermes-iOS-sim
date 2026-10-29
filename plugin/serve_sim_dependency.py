@@ -23,11 +23,12 @@ MANIFEST_DIR = Path(__file__).parent / 'dependencies'
 ENTRY = 'node_modules/serve-sim/dist/serve-sim.js'
 NATIVE = 'node_modules/serve-sim/dist/native/serve-sim-native.node'
 DISCLOSURE = (
-    'Download serve-sim 0.1.48 and the checked-in locked transitive npm tree from registry.npmjs.org '
+    'Download serve-sim 0.1.49-beta.139.1 and the checked-in locked transitive npm tree from registry.npmjs.org '
     'into this profile\'s plugin-data cache (including a fresh private npm cache). '
     'No global installation or upgrade. Package lifecycle scripts are disabled. '
     'Includes executable JavaScript, a native .node addon, camera dylib/helpers and HID/render helpers. '
-    'The stock server exposes local command execution and unauthenticated stream/HID capabilities; '
+    'The preview requires a loopback Host; shell execution is disabled (no --allow-exec), and its token is not in the page. '
+    'Local simulator stream/HID capabilities remain unauthenticated; '
     'loopback is not an authorization boundary. Registry integrity does not establish native source/SLSA provenance; '
     'this setup checks pinned bytes, not provenance. Even separately verified provenance is not runtime authorization or sandboxing. '
     'Xcode build scripts are executable code and require separate trusted-input approval.'
@@ -142,14 +143,14 @@ class StockDependency:
         self.lock_bytes = (MANIFEST_DIR / 'package-lock.json').read_bytes()
         self.lock_digest = digest(self.lock_bytes)
         self.packages = json.loads(self.lock_bytes)['packages']
-        self.cache = self.data_dir / ('serve-sim-0.1.48-' + self.lock_digest[:16])
+        self.cache = self.data_dir / ('serve-sim-0.1.49-beta.139.1-' + self.lock_digest[:16])
         self._lock = asyncio.Lock()
 
     def status(self):
         if self.cache.is_symlink():
             return {'status': 'integrity_or_incomplete', 'ready': False, 'recovery': 'Remove the candidate cache symlink; explicitly retry setup.'}
         if not self.cache.exists():
-            return {'status': 'missing', 'ready': False, 'version': '0.1.48', 'recovery': "Call ios_setup action='provision' for disclosed host approval."}
+            return {'status': 'missing', 'ready': False, 'version': '0.1.49-beta.139.1', 'recovery': "Call ios_setup action='provision' for disclosed host approval."}
         try:
             receipt = json.loads((self.cache / 'receipt.json').read_text())
             if receipt['lock_sha256'] != self.lock_digest or receipt['files'] != _tree(self.cache):
@@ -170,7 +171,7 @@ class StockDependency:
             native = _native_arch((self.cache / NATIVE).read_bytes())
             if native != receipt['native']:
                 raise ValueError('native mismatch')
-            return {'status': 'ready', 'ready': True, 'version': '0.1.48', 'entry': str(self.cache / ENTRY), 'native': native, 'lock_sha256': self.lock_digest, 'provenance': 'not_verified_by_runtime', 'security_admission': 'not_claimed'}
+            return {'status': 'ready', 'ready': True, 'version': '0.1.49-beta.139.1', 'entry': str(self.cache / ENTRY), 'native': native, 'lock_sha256': self.lock_digest, 'provenance': 'not_verified_by_runtime', 'security_admission': 'not_claimed'}
         except (OSError, ValueError, KeyError, TypeError):
             return {'status': 'integrity_or_incomplete', 'ready': False, 'recovery': 'Remove only this candidate dependency cache and explicitly retry setup.'}
 

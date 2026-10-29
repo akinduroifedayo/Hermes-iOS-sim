@@ -315,7 +315,7 @@ def register(ctx) -> None:
         if args['action'] == 'preview':
             return {'action': 'approve', 'message':
                 f"Start/reuse pinned serve-sim for {identity.udid} in {json.dumps(identity.worktree)}. "
-                "Local unauthenticated simulator stream/HID/start/shutdown routes expose device control. Shell execution has token and Origin checks, but the unauthenticated preview page discloses the token. Origin checks do not constrain non-browser local clients, and stock Host validation is missing. Malicious browser content remains a risk. Loopback is not authorization; trusted-local use is not a sandbox. "
+                "Local unauthenticated simulator stream/HID/start/shutdown routes expose device control. The preview requires a loopback Host. Shell execution is disabled (no --allow-exec), and its token is not in the preview page. Origin checks do not constrain non-browser local clients. Loopback is not authorization; trusted-local use is not a sandbox. "
                 "No build, install, launch, boot, erase or reset.",
                 'rule_key': 'hermes-ios:preview:' + identity.target_fingerprint}
         return {'action': 'approve', 'message':
